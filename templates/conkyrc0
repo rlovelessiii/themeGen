@@ -1,0 +1,108 @@
+-- All Credits to respective owner
+-- Modified by Ujjwal Biswas
+-- Modified for auto-generation by Richard Loveless
+
+conky.config = {{
+-- Conky settings
+	background = true,
+	update_interval = 1,
+
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+
+	override_utf8_locale = true,
+
+	double_buffer = true,
+	no_buffers = true,
+
+	text_buffer_size = 2048,
+--imlib_cache_size 0
+
+	temperature_unit = 'celsius',
+
+-- Window specifications
+	own_window_class = 'Conky',
+	own_window = true,
+	own_window_type = 'override',
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
+  -- own_window_argb_visual = true,
+  -- own_window_argb_value = 0,
+
+	border_inner_margin = 0,
+	border_outer_margin = 0,
+
+	minimum_width = 520, minimum_height = 600,
+	maximum_width = 520,
+
+	alignment = 'top_right',
+	gap_x = -20,
+	gap_y = 50,
+
+-- Graphics settings
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+	default_color = 'gray',
+	default_shade_color = 'red',
+	default_outline_color = 'green',
+
+-- Text settings
+	use_xft = true,
+	override_utf8_locale = true,
+	font = 'SF Pro Display:normal:size=8',
+	xftalpha = 0.9,
+	uppercase = false,
+
+	default_color = '{foreground}',
+	color0 = '{color4}',
+	color1 = '{foreground}',
+
+-- Lua Load
+	lua_load = '~/.cache/wal/rings0.lua',
+	lua_draw_hook_pre = 'ring_stats',
+
+}};
+
+conky.text = [[
+# cpu temp
+${{font SF Pro Display:normal:size=8}}${{voffset 14}}${{color1}}${{goto 120}}${{freq_g cpu0}} Ghz${{alignr 330}}${{acpitemp}} °C
+# cpu load
+${{font SF Pro Display:normal:size=8}}${{voffset -2}}${{goto 120}}${{color1}}CPU 1${{alignr 330}}${{color1}}${{cpu cpu1}}%
+${{font SF Pro Display:normal:size=8}}${{voffset 0}}${{goto 120}}${{color1}}CPU 2${{alignr 330}}${{color1}}${{cpu cpu2}}%
+${{font SF Pro Display:normal:size=8}}${{voffset 0}}${{goto 120}}${{color1}}CPU 3${{alignr 330}}${{color1}}${{cpu cpu3}}%
+${{font SF Pro Display:normal:size=8}}${{voffset 0}}${{goto 120}}${{color1}}CPU 4${{alignr 330}}${{color1}}${{cpu cpu4}}%
+# date/time
+${{font SF Pro Display:size=12}}${{alignc -120}}${{voffset -25}}${{color0}}${{time %d %B %Y}}
+${{font SF Pro Display:size=24}}${{alignc -110}}${{color1}}${{voffset -5}}${{time %H}}:${{time %M}}
+# cpu processes
+${{goto 50}}${{voffset -35}}${{font SF Pro Display:normal:size=8}}${{color1}}${{top name 1}}${{alignr 306}}${{top cpu 1}}%
+${{goto 50}}${{font SF Pro Display:normal:size=8}}${{color1}}${{top name 2}}${{alignr 306}}${{top cpu 2}}%
+${{goto 50}}${{font SF Pro Display:normal:size=8}}${{color1}}${{top name 3}}${{alignr 306}}${{top cpu 3}}%
+${{font SF Mono:size=18}}${{color0}}${{goto 60}}${{voffset 3}}CPU
+# memory
+${{font SF Mono:size=16}}${{color0}}${{goto 394}}${{voffset 10}}${{alignr 30}}MEMORY
+${{goto 324}}${{voffset -5}}${{font SF Pro Display:normal:size=8}}${{color1}}${{top_mem name 1}}${{alignr 40}}${{top_mem mem 1}}%
+${{goto 324}}${{font SF Pro Display:normal:size=8}}${{color1}}${{top_mem name 2}}${{alignr 40}}${{top_mem mem 2}}%
+${{goto 324}}${{font SF Pro Display:normal:size=8}}${{color1}}${{top_mem name 3}}${{alignr 40}}${{top_mem mem 3}}%
+${{font SF Pro Display:normal:size=8}}${{voffset 16}}${{goto 348}}${{color1}}SWAP ${{alignr 40}}${{color1}}${{swap}} / ${{color1}}${{swapmax}}
+${{font SF Pro Display:normal:size=8}}${{voffset 1}}${{goto 348}}${{color1}}RAM ${{alignr 40}}${{color1}}${{mem}} / ${{color1}}${{memmax}}
+# hard drives
+${{font SF Pro Display:normal:size=8}}${{goto 80}}${{voffset -69}}Root${{color1}}${{alignr 310}}${{fs_used /}} / ${{fs_size /}}
+${{font SF Pro Display:normal:size=8}}${{goto 80}}${{voffset -3}}Home${{alignr 310}}${{color1}}${{fs_used /home}} / ${{fs_size /home}}
+${{font SF Pro Display:normal:size=8}}${{goto 80}}${{voffset -3}}Boot${{alignr 310}}${{color1}}${{fs_used /boot}} / ${{fs_size /boot}}
+${{font SF Mono:size=14}}${{color0}}${{goto 110}}${{voffset 3}}DRIVES
+# network info
+${{font SF Mono:size=12}}${{color0}}${{voffset 34}}${{goto 324}}NETWORK
+${{if_existing /proc/net/route wlp2s0}}${{font SF Pro Display:normal:size=8}}${{color1}}${{goto 298}}${{voffset 2}}Up${{goto 370}}${{color1}}${{totalup wlp2s0}} / ${{color1}}${{upspeed wlp2s0}}
+${{font SF Pro Display:normal:size=8}}${{goto 298}}${{color1}}${{voffset -2}}Down${{goto 370}}${{color1}}${{totaldown wlp2s0}} / ${{color1}}${{downspeed wlp2s0}}
+${{font SF Pro Display:normal:size=8}}${{goto 298}}${{voffset 2}}Local IP${{goto 370}}${{addr wlp2s0}}${{endif}}
+${{font SF Pro Display:normal:size=8}}${{goto 298}}${{voffset -2}}Public IP${{goto 370}}${{execi 3600 wget -qO - ifconfig.co | sed -e 's/[^[:digit:]\|.]//g'}}
+# battery
+${{font SF Pro Display:size=8}}${{color0}}${{goto 204}}${{voffset -49}}${{color1}}${{battery_percent BAT0}}
+${{font SF Mono:size=10}}${{color0}}${{goto 214}}${{voffset 3}}BATTERY
+# sys info
+${{font SF Mono:size=8}}${{color0}}${{goto 300}}${{voffset 20}}UPTIME${{font SF Pro Display:normal:size=8}}${{color1}}${{alignr 40}}${{uptime_short}}
+${{font SF Mono:size=8}}${{color0}}${{goto 300}}${{voffset 3}}KERNEL${{font SF Pro Display:normal:size=8}}${{color1}}${{alignr 40}}${{kernel}}]];
