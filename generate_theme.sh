@@ -41,7 +41,7 @@ while true; do
 		--text="Would you like to use this theme?" \
 		--no-wrap;
 	then
-		cp $background_conf $dir;
+		cp $background_conf $dir/themeGen-wallpaper.conf;
 		break;
 	fi
 done
@@ -62,7 +62,7 @@ echo "# Getting things ready..." ; sleep 4
 gksu $dir/permissions.sh $colors_gtk $gtk3_themes_dir $wallpaper $background;
 echo "# Updating color-scheme..." ; sleep 4
 echo "# Updating widgets..." ; sleep 1
-$oomox_theme_script -o $theme_name $wal_cache/$colors_oomox;
+$oomox_theme_script -o $theme_name $colors_oomox;
 echo "# Updating icons..." ; sleep 1
 $oomox_icons_script -o $theme_name $colors_oomox;
 echo "# Updating JetBrains color-scheme..." ; sleep 4
