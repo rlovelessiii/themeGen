@@ -2,7 +2,7 @@
 Ring Meters by londonali1010 (2009)
 + Original Work done by Londonali1010 
 + Modified version by Ujjwal Biswas
-+ Modified for auto-generation by Richard Loveless
++ Modified for auto-generation by RLovelessIII
 ]]
 
 settings_table = {{
