@@ -11,6 +11,7 @@ if zenity --question \
 	--text="Would you like to generate and apply a new theme?" \
 	--no-wrap;
 then
-  $dir/generate_theme.sh
+  ${dir}/generate_theme.sh;
+  ${dir}/apply_theme.sh;
 fi
-exit 0
+exit 0;

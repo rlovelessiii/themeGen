@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # generate_theme.sh
 # author: RLovelessIII
@@ -11,6 +11,13 @@
 dir=$(dirname "$0");
 . ${dir}/themeGen.conf;
 
+###########################
+## Variables from config ##
+###########################
+
+alpha=${window_transparency};
+default_photo_dir=${path_to_cloud_drive}${cloud_background_directory};
+
 ############
 ## Script ##
 ############
@@ -22,14 +29,14 @@ if zenity --question \
 then
   photo=$(zenity --file-selection);
 else
-  photo=$photo_dir;
+  photo=${default_photo_dir};
 fi
 
 while true; do
 	(
 	echo "# Generating theme..." ; sleep 1
 	wal -c;
-	wal -a $alpha -i $photo;
+	wal -a ${alpha} -i ${photo};
     	) |
 		zenity --progress \
 	  	--title="Generate Theme" \
@@ -41,51 +48,8 @@ while true; do
 		--text="Would you like to use this theme?" \
 		--no-wrap;
 	then
-		cp $background_conf $dir/themeGen-wallpaper.conf;
 		break;
 	fi
 done
 
-# path to wallpaper => $wallpaper
-. ${dir}/themeGen-wallpaper.conf;
-
-###############
-## Variables ##
-###############
-
-colors_oomox="${wal_cache}colors-oomox"
-colors_gtk="${wal_cache}gtk-${theme_name}.xml";
-background="${background_dir}/${background_name}";
-
-(
-echo "# Getting things ready..." ; sleep 4
-gksu $dir/permissions.sh $colors_gtk $gtk3_themes_dir $wallpaper $background;
-echo "# Updating color-scheme..." ; sleep 4
-echo "# Updating widgets..." ; sleep 1
-$oomox_theme_script -o $theme_name $colors_oomox;
-echo "# Updating icons..." ; sleep 1
-$oomox_icons_script -o $theme_name $colors_oomox;
-echo "# Updating JetBrains color-scheme..." ; sleep 4
-$intellij_script $idea_conf;
-$intellij_script $webstorm_conf;
-$intellij_script $pycharm_conf;
-echo "# Applying theme..." ; sleep 5
-) |
-zenity --progress \
-	--title="Generate Theme" \
-  --text="Generating Pywal color-scheme..." \
-	--pulsate \
-	--time-remaining \
-	--auto-kill \
-	--auto-close;
-
-if zenity --question \
-	--text="Complete! Changes won't take full effect until your next session.\nWould you like to logout now?" \
-	--no-wrap;
-then
-	i3exit logout;
-else
-	i3-msg restart;
-fi
-
-exit 0
+exit 0;

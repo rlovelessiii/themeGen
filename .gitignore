@@ -1,1 +1,7 @@
+# .gitignore
+# Author: RLovelessIII
+# Project: themeGen
+
+.idea/
+test_split.sh
 themeGen-wallpaper.conf
