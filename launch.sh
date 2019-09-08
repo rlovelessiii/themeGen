@@ -6,12 +6,18 @@
 
 dir=$(dirname "$0");
 
-if zenity --question \
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    if zenity --question \
 	--title="Theme Generator" \
-	--text="Would you like to generate and apply a new theme?" \
+	--text="Update theme?" \
 	--no-wrap;
-then
-  ${dir}/generate_theme.sh;
-  ${dir}/apply_theme.sh;
+    then
+      ${dir}/linux/generate_theme.sh;
+      ${dir}/linux/apply_theme.sh;
+    fi
+elif [[ "$OSTYPE" == "darwin19" ]]; then
+    echo "TODO";
+else
+    echo "OOPS!";
 fi
 exit 0;

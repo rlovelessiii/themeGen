@@ -3,5 +3,5 @@
 # Project: themeGen
 
 .idea/
-test_split.sh
-themeGen-wallpaper.conf
+manjaro_i3.conf
+macos_catalina.conf
