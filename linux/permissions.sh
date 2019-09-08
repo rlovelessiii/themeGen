@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# permissions.sh
+# linux/permissions.sh
 # author: Richard Loveless III (RLovelessIII)
 # description: Automate theme changing on Manjaro-i3 (Commands that need root access)
 

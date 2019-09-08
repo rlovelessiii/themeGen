@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# apply_theme.sh
+# linux/apply_theme.sh
 # Author: RLovelessIII
 # Description: Script that applies the newly generated theme
 

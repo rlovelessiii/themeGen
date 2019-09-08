@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# generate_theme.sh
+# linux/generate_theme.sh
 # author: RLovelessIII
 # description: Automate theme changing on Manjaro-i3
 
