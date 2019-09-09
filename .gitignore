@@ -3,5 +3,6 @@
 # Project: themeGen
 
 .idea/
+themeGen.iml
 manjaro_i3.conf
 macos_catalina.conf
