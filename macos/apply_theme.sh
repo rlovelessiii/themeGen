@@ -11,7 +11,9 @@
 dir=$(dirname "$0");
 . ${dir}/config/macos_catalina.conf;
 
+photo=${wallpaper_directory}${1};
+
 wal -c;
-wal -n -i ${wallpaper_directory}/$1;
+wal -n -i ${photo};
 
 exit 0;
