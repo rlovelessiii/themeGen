@@ -6,8 +6,9 @@
 
 dir=$(dirname "$0");
 . ${dir}/config/macos_catalina.conf;
+. ${wal_colors};
 
-sqlite3 "${db}" "UPDATE data SET value = '${1}' WHERE ROWID = 1";
+sqlite3 "${db}" "UPDATE data SET value = '${wallpaper}' WHERE ROWID = 1";
 
 echo ${query};
 

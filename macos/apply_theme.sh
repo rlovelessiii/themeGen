@@ -12,10 +12,11 @@ dir=$(dirname "$0");
 . ${dir}/config/macos_catalina.conf;
 
 photo=${wallpaper_directory}${1};
+wal="/usr/local/bin/wal";
 
-wal -c;
-wal -n -i ${photo};
+${wal} -c;
+${wal} -n -i ${photo};
 
-${dir}/apply_wallpaper.sh ${photo};
+${dir}/apply_wallpaper.sh;
 
 exit 0;
