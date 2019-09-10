@@ -42,10 +42,6 @@ dir=$(dirname "$0");
 ## Script ##
 ############
 
-# Writes the name of the wallpaper to the cloud directory
-#IFS='/' read -r -a  path_to_wallpaper <<< ${wallpaper};
-#echo ${path_to_wallpaper[-1]} > "${cloud_dir}/wallpaper.conf";
-
 (
 echo "# Getting things ready..." ; sleep 4
 gksu ${dir}/permissions.sh ${wal_colors_gtk} ${gtk3_themes_directory} ${wallpaper} ${lock_screen};
@@ -61,26 +57,26 @@ echo "# Applying theme..." ; sleep 5
 ) |
 zenity --progress \
     --title="Generate Theme" \
-	--pulsate \
-	--time-remaining \
-	--auto-kill \
-	--auto-close;
+	  --pulsate \
+	  --time-remaining \
+	  --auto-kill \
+	  --auto-close;
 
 if zenity --question \
     --text="Complete! Would you also like to update \"${remote_host}\" using this theme?" \
     --no-wrap;
 then
-    echo "TODO";
-    #ssh macos;
+    IFS='/' read -r -a  path_to_wallpaper <<< ${wallpaper};
+    echo "ssh macos update-theme ${path_to_wallpaper[-1]}";
 fi
 
 if zenity --question \
-	--text="Complete! Changes won't take full effect until your next session.\nWould you like to logout now?" \
-	--no-wrap;
+    --text="Complete! Changes won't take full effect until your next session.\nWould you like to logout now?" \
+    --no-wrap;
 then
-	i3exit logout;
+	  i3exit logout;
 else
-	i3-msg restart;
+	  i3-msg restart;
 fi
 
 exit 0;
