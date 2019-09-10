@@ -15,8 +15,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       ${dir}/linux/generate_theme.sh;
       ${dir}/linux/apply_theme.sh;
     fi
-elif [[ "$OSTYPE" == "darwin19" ]]; then
-    echo "TODO";
+elif [[ "$OSTYPE" == "darwin19" ]];
+then
+    ${dir}/macos/apply_theme.sh ${1};
 else
     echo "OOPS!";
 fi

@@ -16,4 +16,6 @@ photo=${wallpaper_directory}${1};
 wal -c;
 wal -n -i ${photo};
 
+${dir}/apply_wallpaper.sh ${photo};
+
 exit 0;
