@@ -10,8 +10,6 @@ dir=$(dirname "$0");
 
 sqlite3 "${db}" "UPDATE data SET value = '${wallpaper}' WHERE ROWID = 1";
 
-echo ${query};
-
 killall Dock;
 
 exit 0;

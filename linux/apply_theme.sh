@@ -67,7 +67,9 @@ if zenity --question \
     --no-wrap;
 then
     IFS='/' read -r -a  path_to_wallpaper <<< ${wallpaper};
-    echo "ssh macos update-theme ${path_to_wallpaper[-1]}";
+    wallpaper=${path_to_wallpaper[-1]};
+
+    echo "ssh -t macos -ic 'update-theme ${wallpaper}'";
 fi
 
 if zenity --question \
