@@ -69,7 +69,7 @@ then
     IFS='/' read -r -a  path_to_wallpaper <<< ${wallpaper};
     wallpaper=${path_to_wallpaper[-1]};
 
-    echo "update-theme ${wallpaper}" | ssh -tt macos;
+    echo "update-theme ${wallpaper}; exit;" | ssh -tt macos;
 fi
 
 if zenity --question \
