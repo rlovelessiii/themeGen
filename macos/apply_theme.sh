@@ -15,8 +15,6 @@ photo=${wallpaper_directory}${1};
 wal="/usr/local/bin/wal";
 
 ${wal} -c;
-${wal} -n -i ${photo};
-
-${dir}/apply_wallpaper.sh;
+${wal} -i ${photo};
 
 exit 0;
