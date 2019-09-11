@@ -17,4 +17,8 @@ wal="/usr/local/bin/wal";
 ${wal} -c;
 ${wal} -i ${photo};
 
+${intellij_script} ${idea_config};
+${intellij_script} ${webstorm_config};
+${intellij_script} ${pycharm_config};
+
 exit 0;
