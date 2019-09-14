@@ -36,7 +36,7 @@ while true; do
 	(
 	echo "# Generating theme..." ; sleep 1
 	wal -c;
-	wal -a ${window_transparency} -i ${photo};
+	wal -a ${window_transparency} -i ${photo} --iterative;
     	) |
 		zenity --progress \
 	  	--title="Generate Theme" \
