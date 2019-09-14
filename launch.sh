@@ -6,7 +6,9 @@
 
 dir=$(dirname "$0");
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+os=$(uname);
+
+if [[ ${os} == "Linux" ]]; then
     if zenity --question \
 	--title="Theme Generator" \
 	--text="Update theme?" \
@@ -15,7 +17,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       ${dir}/linux/generate_theme.sh;
       ${dir}/linux/apply_theme.sh;
     fi
-elif [[ "$OSTYPE" == "darwin19" ]];
+elif [[ ${os} == "Darwin" ]];
 then
     ${dir}/macos/apply_theme.sh ${1};
 else

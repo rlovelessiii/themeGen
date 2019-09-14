@@ -9,7 +9,7 @@
 ############
 
 dir=$(dirname "$0");
-. ${dir}/config/macos_catalina.conf;
+. ${dir}/config/macos.conf;
 
 photo=${wallpaper_directory}${1};
 wal="/usr/local/bin/wal";
