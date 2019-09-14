@@ -5,4 +5,5 @@
 .idea/
 themeGen.iml
 manjaro_i3.conf
-macos_catalina.conf
+macos.conf
+.DS_Store
