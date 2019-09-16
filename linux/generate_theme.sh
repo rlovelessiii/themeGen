@@ -4,19 +4,21 @@
 # author: RLovelessIII
 # description: Automate theme changing on Manjaro-i3
 
+# Get current directory
+DIR=$(dirname "$0");
+
 ############
 ## Config ##
 ############
 
-DIR=$(dirname "$0");
+# # # # # # # # # # #
+#  manjaro_i3.conf  #
+# # # # # # # # # # #
 . ${DIR}/config/manjaro_i3.conf;
-
-###############
-## Variables ##
-###############
-
-## $wallpaper_directory = Default directory for wallpapers
-## $window_transparency = Window background transparency
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#  $wallpaper_directory = Default directory for wallpapers  #
+#  $window_transparency = Window background transparency    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 ############
 ## Script ##
