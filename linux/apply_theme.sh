@@ -4,12 +4,14 @@
 # Author: RLovelessIII
 # Description: Script that applies the newly generated theme
 
+# Get current directory
+DIR=$(dirname "$0");
+
 ############
 ## Config ##
 ############
-
-dir=$(dirname "$0");
-. ${dir}/config/manjaro_i3.conf;
+# Source (.) config && Pywal colors script
+. "${DIR}"/config/manjaro_i3.conf;
 . ${wal_colors};
 
 ###############
@@ -43,16 +45,20 @@ dir=$(dirname "$0");
 ############
 
 (
-echo "# Getting things ready..." ; sleep 4
-gksu ${dir}/permissions.sh ${wal_colors_gtk} ${gtk3_themes_directory} ${wallpaper} ${lock_screen};
+echo "# Getting things ready..." ; sleep 4 # Sleep for [default: 4] seconds to emulate a working process
+# Uses the gui sudo prompt to execute permissions.sh as root
+gksu "${DIR}"/permissions.sh "${wal_colors_gtk}" "${gtk3_themes_directory}" "${wallpaper}" "${lock_screen}";
 echo "# Updating theme..." ; sleep 1
-${oomox_theme_script} -o ${theme_name} ${wal_colors_oomox};
+# Use Oomox to update WM theme (widgets, windows, etc)
+"${oomox_theme_script}" -o "${theme_name}" "${wal_colors_oomox}";
 echo "# Updating icons..." ; sleep 1
-${oomox_icons_script} -o ${theme_name} ${wal_colors_oomox};
+# Use Oomax to update system icons: mainly directory icons
+"${oomox_icons_script}" -o "${theme_name}" "${wal_colors_oomox}";
 echo "# Updating JetBrains color-scheme..." ; sleep 4
-${intellij_script} ${idea_config};
-${intellij_script} ${webstorm_config};
-${intellij_script} ${pycharm_config};
+# Execute IntelliJPywal script to update Jetbrains' IDE themes
+"${intellij_script}" "${idea_config}";
+"${intellij_script}" "${webstorm_config}";
+"${intellij_script}" "${pycharm_config}";
 echo "# Applying theme..." ; sleep 5
 ) |
 zenity --progress \
@@ -62,22 +68,39 @@ zenity --progress \
 	  --auto-kill \
 	  --auto-close;
 
+# Prompt to update remote host's theme using the same wallpaper
+# DISCLAIMER: To be able to run this script W/O the use of a terminal, ssh-keygen pair must be
+#             established to prevent password prompt for connection.
 if zenity --question \
     --text="Complete! Would you also like to update \"${remote_host}\" using this theme?" \
     --no-wrap;
 then
-    IFS='/' read -r -a  path_to_wallpaper <<< ${wallpaper};
+    # Use IFS to split the wallpaper path by the '/' delimeter into an array variable
+    # Retrieve the last index of the array (name of the wallpaper)
+    IFS='/' read -r -a  path_to_wallpaper <<< "${wallpaper}";
     wallpaper=${path_to_wallpaper[-1]};
 
-    echo "update-theme ${wallpaper}; exit;" | ssh -tt macos;
+    # Alias 'update-theme' is located on remote machine which executes themeGen/launch.sh
+    # To prevent the need to establish which shell, or executeable paths we need for the remote-host,
+    # we echo two commands {
+    #      1. Using the remote alias to update the theme passing the name of the wallpaper
+    #      2. Terminate connection to the remote-host
+    #    }
+    # Echoing the commands enables terminal interaction without the need to specifiy executable paths
+    # -tt is used to force a psuedo-terminal during the session to allow the use of stdin with shh
+    echo "update-theme ${wallpaper}; exit;" | ssh -tt ${remote_host};
 fi
 
+# Prompt user if they would like to restart their session
+# GTK3 themes will NOT be applied until AFTER new session
 if zenity --question \
     --text="Complete! Changes won't take full effect until your next session.\nWould you like to logout now?" \
     --no-wrap;
 then
+    # End session and logout
 	  i3exit logout;
 else
+    # Reload i3 to initiate most changes
 	  i3-msg restart;
 fi
 

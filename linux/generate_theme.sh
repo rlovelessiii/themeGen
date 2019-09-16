@@ -22,6 +22,7 @@ dir=$(dirname "$0");
 ## Script ##
 ############
 
+# Prompt user for photo selection, if no then a random photo is choosen from the $wallpaper_directory
 if zenity --question \
   --title="Theme Generator" \
   --text="Choose wallpaper?\nNo for random." \
@@ -32,10 +33,17 @@ else
   photo=${wallpaper_directory};
 fi
 
+# Prompt user if they want to use the new theme,
+# Loops until user selects 'yes'
 while true; do
 	(
 	echo "# Generating theme..." ; sleep 1
+	# Clear out current color-scheme cache
 	wal -c;
+	# Use Pywal (wal) to generate theme colors and set desktop wallpaper
+	# -a sets window transparency
+	# -i path to photo used for color generation
+	# --iterative used if choosing a random wallpaper, this will select the next wallpaper rather than a random one each time
 	wal -a ${window_transparency} -i ${photo} --iterative;
     	) |
 		zenity --progress \

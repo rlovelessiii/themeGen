@@ -4,23 +4,26 @@
 # author: RLovelessIII
 # description: launch script for generate_theme.sh
 
-dir=$(dirname "$0");
+# Get current directory && current Operating System
+DIR=$(dirname "$0");
+OS=$(uname);
 
-os=$(uname);
-
-if [[ ${os} == "Linux" ]]; then
+# Execute script correspoding to operating system
+# DISCLAIMER: Only tested on Manjaro-i3 and MacOS 10.14 - 10.15
+if [[ ${OS} == "Linux" ]]; then
     if zenity --question \
 	--title="Theme Generator" \
 	--text="Update theme?" \
 	--no-wrap;
     then
-      ${dir}/linux/generate_theme.sh;
-      ${dir}/linux/apply_theme.sh;
+      "${DIR}"/linux/generate_theme.sh;
+      "${DIR}"/linux/apply_theme.sh;
     fi
-elif [[ ${os} == "Darwin" ]];
+elif [[ ${OS} == "Darwin" ]];
 then
-    ${dir}/macos/apply_theme.sh ${1};
+    photo=${1};
+    "${DIR}"/macos/apply_theme.sh "${photo}";
 else
-    echo "OOPS!";
+    echo "OOPS! OS is not recognized. Please submit a bug report to RLovelessIII :)";
 fi
 exit 0;
