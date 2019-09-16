@@ -8,8 +8,8 @@
 ## Config ##
 ############
 
-dir=$(dirname "$0");
-. ${dir}/config/manjaro_i3.conf;
+DIR=$(dirname "$0");
+. ${DIR}/config/manjaro_i3.conf;
 
 ###############
 ## Variables ##

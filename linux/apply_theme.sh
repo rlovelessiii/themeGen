@@ -46,7 +46,7 @@ DIR=$(dirname "$0");
 
 (
 echo "# Getting things ready..." ; sleep 4 # Sleep for [default: 4] seconds to emulate a working process
-# Uses the gui sudo prompt to execute permissions.sh as root
+# Uses the gui prompt to execute permissions.sh as root
 gksu "${DIR}"/permissions.sh "${wal_colors_gtk}" "${gtk3_themes_directory}" "${wallpaper}" "${lock_screen}";
 echo "# Updating theme..." ; sleep 1
 # Use Oomox to update WM theme (widgets, windows, etc)
@@ -82,10 +82,9 @@ then
 
     # Alias 'update-theme' is located on remote machine which executes themeGen/launch.sh
     # To prevent the need to establish which shell, or executeable paths we need for the remote-host,
-    # we echo two commands {
+    # we echo two commands
     #      1. Using the remote alias to update the theme passing the name of the wallpaper
     #      2. Terminate connection to the remote-host
-    #    }
     # Echoing the commands enables terminal interaction without the need to specifiy executable paths
     # -tt is used to force a psuedo-terminal during the session to allow the use of stdin with shh
     echo "update-theme ${wallpaper}; exit;" | ssh -tt ${remote_host};
