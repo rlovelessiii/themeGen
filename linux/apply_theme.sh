@@ -5,7 +5,7 @@
 # Description: Script that applies the newly generated theme
 
 # Get current directory
-DIR=$(dirname "$0");
+DIR=$(dirname "$0")
 
 ############
 ## Config ##
@@ -14,7 +14,7 @@ DIR=$(dirname "$0");
 # # # # # # # # # # #
 #  manjaro_i3.conf  #
 # # # # # # # # # # #
-. "${DIR}"/config/manjaro_i3.conf;
+. "${DIR}"/config/manjaro_i3.conf
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #  $theme_name = Name for generated themes                                            #
 #  $lock_screen = Path to image used in the greeter                                   #
@@ -46,18 +46,16 @@ DIR=$(dirname "$0");
 (
 echo "# Getting things ready..." ; sleep 4 # Sleep for [default: 4] seconds to emulate a working process
 # Uses the gui prompt to execute permissions.sh as root
-gksu "${DIR}"/permissions.sh "${wal_colors_gtk}" "${gtk3_themes_directory}" "${wallpaper}" "${lock_screen}";
+gksu "${DIR}"/permissions.sh "${wal_colors_gtk}" "${gtk3_themes_directory}" "${wallpaper}" "${lock_screen}"
 echo "# Updating theme..." ; sleep 1
 # Use Oomox to update WM theme (widgets, windows, etc)
-"${oomox_theme_script}" -o "${theme_name}" "${wal_colors_oomox}";
+"${oomox_theme_script}" -o "${theme_name}" "${wal_colors_oomox}"
 echo "# Updating icons..." ; sleep 1
 # Use Oomax to update system icons: mainly directory icons
-"${oomox_icons_script}" -o "${theme_name}" "${wal_colors_oomox}";
+"${oomox_icons_script}" -o "${theme_name}" "${wal_colors_oomox}"
 echo "# Updating JetBrains color-scheme..." ; sleep 4
 # Execute IntelliJPywal script to update Jetbrains' IDE themes
-"${intellij_script}" "${idea_config}";
-"${intellij_script}" "${webstorm_config}";
-"${intellij_script}" "${pycharm_config}";
+"${intellij_script}"
 echo "# Applying theme..." ; sleep 5
 ) |
 zenity --progress \
@@ -80,7 +78,7 @@ then
     wallpaper=${path_to_wallpaper[-1]};
 
     # Alias 'update-theme' is located on remote machine which executes themeGen/launch.sh
-    # To prevent the need to establish which shell, or executeable paths we need for the remote-host,
+    # This prevents the need to establish which shell, or executeable paths we need for the remote-host,
     # we echo two commands
     #      1. Using the remote alias to update the theme passing the name of the wallpaper
     #      2. Terminate connection to the remote-host
