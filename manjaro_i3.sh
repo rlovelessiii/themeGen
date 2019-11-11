@@ -65,7 +65,7 @@ function apply_theme {
   # GUI pop-up prompts
   (
   echo "# Getting things ready..." ; sleep 4 # Sleep for [default: 4] seconds to emulate a working process
-  gksu "${DIR}/linux/permissions.sh" \
+  gksu "${DIR}/permissions.sh" \
     "${wal_cache_dir}/${theme_name}.xml" \
     "${gtk3_themes_directory}" \
     "${wallpaper}" \

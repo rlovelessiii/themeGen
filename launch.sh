@@ -16,7 +16,7 @@ if [[ ${OS} == "Linux" ]]; then
 	--text="Update theme?" \
 	--no-wrap;
     then
-      . "${DIR}/linux/manjaro_i3.sh"
+      . "${DIR}/manjaro_i3.sh"
       generate_theme && \
       apply_theme && \
       update_remote && \
@@ -24,8 +24,8 @@ if [[ ${OS} == "Linux" ]]; then
     fi
 elif [[ ${OS} == "Darwin" ]];
 then
-    photo=${1};
-    "${DIR}/macos/apply_theme.sh" "${photo}";
+    . "${DIR}/macos.sh"
+    apply_theme ${1}
 else
     echo "OOPS! OS is not recognized. Please submit a bug report to RLovelessIII :)";
 fi
