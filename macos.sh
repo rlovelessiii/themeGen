@@ -7,7 +7,7 @@
 function update_wallpapers {
   wallpaper_repo="${HOME}/Pictures/desktop-wallpapers/"
   # Update the wallpaper directory repo
-  cd ${wallpaper_repo} && git pull
+  cd "${wallpaper_repo}" && git pull
 }
 
 function apply_theme {

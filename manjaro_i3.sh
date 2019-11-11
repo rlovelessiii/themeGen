@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
+function update_wallpapers {
+  wallpaper_repo="${HOME}/Pictures/desktop-wallpapers/"
+  # Update the wallpaper directory repo
+  cd "${wallpaper_repo}" && git pull
+}
+
 function generate_theme {
   ## Wallpaper album ##
-  wallpaper_directory="${HOME}/GoogleDrive/wallpapers"
+  wallpaper_directory="${wallpaper_repo}/wallpapers/"
   ## Window Background Transparency ##
   window_transparency=70
 

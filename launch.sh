@@ -17,6 +17,7 @@ if [[ ${OS} == "Linux" ]]; then
 	--no-wrap;
     then
       . "${DIR}/manjaro_i3.sh"
+      update_wallpapers && \
       generate_theme && \
       apply_theme && \
       update_remote && \
