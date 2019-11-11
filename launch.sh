@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # launch.sh
 # author: RLovelessIII
@@ -16,17 +16,16 @@ if [[ ${OS} == "Linux" ]]; then
 	--text="Update theme?" \
 	--no-wrap;
     then
-      . ${DIR}/linux/manjaro_i3.sh
-      generate_theme
-      apply_theme
-      update_remote
+      . "${DIR}/linux/manjaro_i3.sh"
+      generate_theme && \
+      apply_theme && \
+      update_remote && \
       restart_logout
     fi
 elif [[ ${OS} == "Darwin" ]];
 then
     photo=${1};
-    "${DIR}"/macos/apply_theme.sh "${photo}";
+    "${DIR}/macos/apply_theme.sh" "${photo}";
 else
     echo "OOPS! OS is not recognized. Please submit a bug report to RLovelessIII :)";
 fi
-exit 0;
