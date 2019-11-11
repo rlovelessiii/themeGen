@@ -4,11 +4,17 @@
 # author: Richard Loveless III (RLovelessIII)
 # description: Script that applies a new theme to MacOS 10.14 Mojave
 
+function update_wallpapers {
+  wallpaper_repo="${HOME}/Pictures/desktop-wallpapers/"
+  # Update the wallpaper directory repo
+  cd ${wallpaper_repo} && git pull
+}
+
 function apply_theme {
   # Include Pywal executable path for remote execution
   wal="/usr/local/bin/wal"
   # Wallpaper Directory
-  wallpaper_directory="${HOME}/.googleDrive/wallpapers/"
+  wallpaper_directory="${wallpaper_repo}/wallpapers/"
   ## Script that updates any JetBrains IDE color scheme to match Pywal color gen ##
   intellij_script="${HOME}/.scripts/intellijPywal/launch.sh"
   # Retrieve 1st arg (photo name) and append it to $wallpaper_directory

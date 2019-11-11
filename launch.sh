@@ -25,7 +25,7 @@ if [[ ${OS} == "Linux" ]]; then
 elif [[ ${OS} == "Darwin" ]];
 then
     . "${DIR}/macos.sh"
-    apply_theme ${1}
+    update_wallpapers && apply_theme ${1}
 else
     echo "OOPS! OS is not recognized. Please submit a bug report to RLovelessIII :)";
 fi
