@@ -114,6 +114,9 @@ function update_remote {
       IFS='/' read -r -a  path_to_wallpaper <<< "${wallpaper}";
       wallpaper=${path_to_wallpaper[-1]};
 
+      ## Rerieve user for remote host password
+      pwd="$(zenity --password --title=Authentication)"
+
       # Alias 'update-theme' is located on remote machine which executes themeGen/launch.sh
       # This prevents the need to establish which shell, or executeable paths we need for the remote-host,
       # we echo two commands
@@ -121,7 +124,7 @@ function update_remote {
       #      2. Terminate connection to the remote-host
       # Echoing the commands enables terminal interaction without the need to specifiy executable paths
       # -tt is used to force a psuedo-terminal during the session to allow the use of stdin with shh
-      echo "update-theme ${wallpaper}; exit;" | ssh -tt ${remote_host};
+      echo "update-theme ${wallpaper}; ${pwd}; exit;" | ssh -tt ${remote_host};
   fi
 }
 
