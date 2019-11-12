@@ -9,7 +9,6 @@ DIR=$(dirname "$0")
 OS=$(uname)
 
 # Execute script correspoding to operating system
-# DISCLAIMER: Only tested on Manjaro-i3 and MacOS 10.14 - 10.15
 if [[ ${OS} == "Linux" ]]
  then
     if zenity --question \
@@ -20,6 +19,7 @@ if [[ ${OS} == "Linux" ]]
       . "${DIR}/manjaro_i3.sh"
       update_wallpapers && \
       generate_theme && \
+      permissions && \
       apply_theme && \
       update_remote && \
       restart_logout
