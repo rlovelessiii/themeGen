@@ -62,7 +62,7 @@ function permissions {
   . "${wal_cache_dir}/colors.sh"
 
   ## Rerieve user password
-  pwd="$(zenity --password --title=Authentication)\n"
+  pwd=$(zenity --password)
 
   echo "$pwd" | sudo -S cp "${wal_cache_dir}/${theme_name}.xml" "$gtk3_themes_directory"
   echo "$pwd" | sudo -S convert "${wallpaper}" -blur 0x5 "$lock_screen"
@@ -115,7 +115,7 @@ function update_remote {
       wallpaper=${path_to_wallpaper[-1]};
 
       ## Rerieve user for remote host password
-      pwd="$(zenity --password --title=Authentication)"
+      pwd=$(zenity --password)
 
       # Alias 'update-theme' is located on remote machine which executes themeGen/launch.sh
       # This prevents the need to establish which shell, or executeable paths we need for the remote-host,
@@ -124,7 +124,9 @@ function update_remote {
       #      2. Terminate connection to the remote-host
       # Echoing the commands enables terminal interaction without the need to specifiy executable paths
       # -tt is used to force a psuedo-terminal during the session to allow the use of stdin with shh
-      echo "update-theme ${wallpaper}; ${pwd}; exit;" | ssh -tt ${remote_host};
+      echo "echo ${pwd} | update-theme ${wallpaper}; exit;" | ssh -tt ${remote_host};
+
+      unset pwd
   fi
 }
 
