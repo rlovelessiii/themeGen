@@ -89,7 +89,7 @@ function apply_theme {
   echo "# Updating JetBrains color-scheme..." ; sleep 4
   # Execute IntelliJPywal script to update Jetbrains' IDE themes
   "${intellij_script}"
-  echo "# Applying theme..." ; sleep 5
+  echo "# Finishing up..." ; sleep 2
   ) |
   zenity --progress \
       --title="Generate Theme" \
