@@ -8,7 +8,7 @@
 DIR=$(dirname "$0")
 OS=$(uname)
 
-# Execute script correspoding to operating system
+# Execute script corresponding to operating system
 if [[ ${OS} == "Linux" ]]
  then
     if zenity --question \
