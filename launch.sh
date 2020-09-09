@@ -12,7 +12,6 @@ OS=$(uname)
 if [[ ${OS} == "Linux" ]]
  then
     if zenity --question \
-      --title="Theme Generator" \
       --text="Update theme?" \
       --no-wrap
     then
@@ -21,7 +20,7 @@ if [[ ${OS} == "Linux" ]]
       generate_theme && \
       permissions && \
       apply_theme && \
-      update_remote && \
+      # update_remote && \
       restart_logout
     fi
 elif [[ ${OS} == "Darwin" ]];

@@ -14,7 +14,6 @@ function generate_theme {
 
   # Prompt user for photo selection, if no then a random photo is choosen from the $wallpaper_directory
   if zenity --question \
-    --title="Theme Generator" \
     --text="Choose wallpaper?\nNo for random." \
     --no-wrap;
   then
@@ -64,7 +63,7 @@ function permissions {
   ## Rerieve user password
   pwd=$(zenity --password)
 
-  echo "$pwd" | sudo -S cp "${wal_cache_dir}/${theme_name}.xml" "$gtk3_themes_directory"
+  # echo "$pwd" | sudo -S cp "${wal_cache_dir}/${theme_name}.xml" "$gtk3_themes_directory"
   echo "$pwd" | sudo -S convert "${wallpaper}" -blur 0x5 "$lock_screen"
 
   unset pwd
@@ -72,7 +71,7 @@ function permissions {
 
 function apply_theme {
   ## Oomox's theme/icon changing scripts ##
-  oomox_theme_script="/opt/oomox/plugins/theme_arc/arc-theme/change_color.sh"
+  oomox_theme_script="/opt/oomox/plugins/theme_materia/materia-theme/change_color.sh"
   oomox_icons_script="/opt/oomox/plugins/icons_papirus/change_color.sh"
   ## Script that updates any JetBrains IDE color scheme to match Pywal color gen ##
   intellij_script="$HOME/.scripts/intellijPywal/launch.sh"
@@ -84,11 +83,11 @@ function apply_theme {
   # Use Oomox to update WM theme (widgets, windows, etc)
   "${oomox_theme_script}" -o "${theme_name}" "${wal_cache_dir}/colors-oomox"
   echo "# Updating icons..." ; sleep 1
-  # Use Oomax to update system icons: mainly directory icons
+  # Use Oomox to update system icons: mainly directory icons
   "${oomox_icons_script}" -o "${theme_name}" "${wal_cache_dir}/colors-oomox"
   echo "# Updating JetBrains color-scheme..." ; sleep 4
   # Execute IntelliJPywal script to update Jetbrains' IDE themes
-  "${intellij_script}"
+  # "${intellij_script}"
   echo "# Finishing up..." ; sleep 2
   ) |
   zenity --progress \
